@@ -10,21 +10,39 @@ public class CharController : MonoBehaviour
     private Rigidbody rb;
     private bool isWalkingRight = true;
     private Animator anim;
+    private GameManager gameManager;
+
     private static readonly int IsFalling = Animator.StringToHash("isFalling");
+    private static readonly int IsGameRunning = Animator.StringToHash("isGameStarted");
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void FixedUpdate()
     {
+        if (!gameManager.isGameStarted)
+        {
+            return;
+        }
+        else
+        {
+            anim.SetTrigger(IsGameRunning);
+        }
+
         rb.transform.position = transform.position + transform.forward * 2 * Time.deltaTime;
     }
 
     private void Update()
     {
+        if (!gameManager.isGameStarted)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SwitchDirection();
