@@ -6,7 +6,9 @@ using UnityEngine;
 public class FollowCam : MonoBehaviour
 {
     public Transform target;
+    
     private Vector3 offset;
+
 
     private void Awake()
     {
