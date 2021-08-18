@@ -53,6 +53,11 @@ public class CharController : MonoBehaviour
         {
             anim.SetTrigger(IsFalling);
         }
+
+        if (transform.position.y < -2)
+        {
+            gameManager.EndGame();
+        }
     }
 
     private void SwitchDirection()
